@@ -3,11 +3,11 @@
 
 import * as React from 'react'
 import {
-  useForceRerender,
-  useDebouncedState,
   AppGrid,
-  updateGridState,
   updateGridCellState,
+  updateGridState,
+  useDebouncedState,
+  useForceRerender,
 } from '../utils'
 
 const AppStateContext = React.createContext()
@@ -108,14 +108,10 @@ Cell = React.memo(Cell)
 function DogNameInput() {
   // 🐨 replace the useAppState and useAppDispatch with a normal useState here
   // to manage the dogName locally within this component
-  const state = useAppState()
-  const dispatch = useAppDispatch()
-  const {dogName} = state
+  const [dogName, setDogName] = React.useState('')
 
   function handleChange(event) {
-    const newDogName = event.target.value
-    // 🐨 change this to call your state setter that you get from useState
-    dispatch({type: 'TYPED_IN_DOG_INPUT', dogName: newDogName})
+    setDogName(event.target.value)
   }
 
   return (
